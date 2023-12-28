@@ -1,0 +1,24 @@
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Common\bin\Debug\Common.dll
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Common\bin\Debug\Common.pdb
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Common\obj\Debug\Common.csproj.AssemblyReference.cache
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Common\obj\Debug\Common.dll
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Common\obj\Debug\Common.pdb
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Common\bin\Debug\Common.dll.config
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Common\bin\Debug\EntityFramework.dll
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Common\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Common\bin\Debug\EntityFramework.xml
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Common\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Common\obj\Debug\Common.csproj.CopyComplete
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Common\bin\Debug\Common.dll.config
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Common\bin\Debug\Common.dll
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Common\bin\Debug\Common.pdb
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Common\bin\Debug\EntityFramework.dll
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Common\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Common\bin\Debug\EntityFramework.xml
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Common\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Common\obj\Debug\Common.csprojAssemblyReference.cache
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Common\obj\Debug\Common.csproj.CopyComplete
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Common\obj\Debug\Common.dll
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Common\obj\Debug\Common.pdb

@@ -1,0 +1,30 @@
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\DataAccess\bin\Debug\DataAccess.dll
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\DataAccess\bin\Debug\DataAccess.pdb
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\DataAccess\bin\Debug\Common.dll
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\DataAccess\bin\Debug\Common.pdb
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\DataAccess\obj\Debug\DataAccess.csproj.AssemblyReference.cache
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\DataAccess\obj\Debug\DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\DataAccess\obj\Debug\DataAccess.csproj.CopyComplete
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\DataAccess\obj\Debug\DataAccess.dll
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\DataAccess\obj\Debug\DataAccess.pdb
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\DataAccess\bin\Debug\DataAccess.dll.config
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\DataAccess\bin\Debug\EntityFramework.dll
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\DataAccess\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\DataAccess\bin\Debug\Common.dll.config
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\DataAccess\bin\Debug\EntityFramework.xml
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Elena\Desktop\OOPAssignmentRepo\DataAccess\bin\Debug\DataAccess.dll.config
+C:\Users\Elena\Desktop\OOPAssignmentRepo\DataAccess\bin\Debug\DataAccess.dll
+C:\Users\Elena\Desktop\OOPAssignmentRepo\DataAccess\bin\Debug\DataAccess.pdb
+C:\Users\Elena\Desktop\OOPAssignmentRepo\DataAccess\bin\Debug\Common.dll
+C:\Users\Elena\Desktop\OOPAssignmentRepo\DataAccess\bin\Debug\EntityFramework.dll
+C:\Users\Elena\Desktop\OOPAssignmentRepo\DataAccess\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Elena\Desktop\OOPAssignmentRepo\DataAccess\bin\Debug\Common.pdb
+C:\Users\Elena\Desktop\OOPAssignmentRepo\DataAccess\bin\Debug\Common.dll.config
+C:\Users\Elena\Desktop\OOPAssignmentRepo\DataAccess\bin\Debug\EntityFramework.xml
+C:\Users\Elena\Desktop\OOPAssignmentRepo\DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Elena\Desktop\OOPAssignmentRepo\DataAccess\obj\Debug\DataAccess.csprojAssemblyReference.cache
+C:\Users\Elena\Desktop\OOPAssignmentRepo\DataAccess\obj\Debug\DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Elena\Desktop\OOPAssignmentRepo\DataAccess\obj\Debug\DataAccess.csproj.CopyComplete
+C:\Users\Elena\Desktop\OOPAssignmentRepo\DataAccess\obj\Debug\DataAccess.dll
+C:\Users\Elena\Desktop\OOPAssignmentRepo\DataAccess\obj\Debug\DataAccess.pdb

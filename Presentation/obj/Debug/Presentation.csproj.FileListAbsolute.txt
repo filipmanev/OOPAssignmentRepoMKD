@@ -1,0 +1,36 @@
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Presentation\bin\Debug\Presentation.exe.config
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Presentation\bin\Debug\Presentation.exe
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Presentation\bin\Debug\Presentation.pdb
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Presentation\bin\Debug\Common.dll
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Presentation\bin\Debug\DataAccess.dll
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Presentation\bin\Debug\Common.pdb
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Presentation\bin\Debug\DataAccess.pdb
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Presentation\obj\Debug\Presentation.csproj.AssemblyReference.cache
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Presentation\obj\Debug\Presentation.csproj.CoreCompileInputs.cache
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Presentation\obj\Debug\Presentation.csproj.CopyComplete
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Presentation\obj\Debug\Presentation.exe
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Presentation\obj\Debug\Presentation.pdb
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Presentation\bin\Debug\EntityFramework.dll
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Presentation\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Presentation\bin\Debug\Common.dll.config
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Presentation\bin\Debug\DataAccess.dll.config
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Presentation\bin\Debug\EntityFramework.xml
+C:\Users\Filip\Desktop\Home Assignment OOP\Common\Presentation\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Presentation\bin\Debug\Presentation.exe.config
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Presentation\bin\Debug\Presentation.exe
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Presentation\bin\Debug\Presentation.pdb
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Presentation\bin\Debug\Common.dll
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Presentation\bin\Debug\DataAccess.dll
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Presentation\bin\Debug\EntityFramework.dll
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Presentation\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Presentation\bin\Debug\Common.pdb
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Presentation\bin\Debug\Common.dll.config
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Presentation\bin\Debug\DataAccess.pdb
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Presentation\bin\Debug\DataAccess.dll.config
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Presentation\bin\Debug\EntityFramework.xml
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Presentation\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Presentation\obj\Debug\Presentation.csprojAssemblyReference.cache
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Presentation\obj\Debug\Presentation.csproj.CoreCompileInputs.cache
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Presentation\obj\Debug\Presentation.csproj.CopyComplete
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Presentation\obj\Debug\Presentation.exe
+C:\Users\Elena\Desktop\OOPAssignmentRepo\Presentation\obj\Debug\Presentation.pdb

@@ -9,35 +9,21 @@ namespace Presentation
 {
     public class Program
     {
-
-        static int gettingUserInput(List<int> playerShipsList)
+        static void Main(string[] args)
         {
 
-            int userShipChosen = 0;
-
-
-            if (playerShipsList.Count <= 5)
-            {
-                Console.WriteLine("\nPlease select a ship by its ID: ");
-                userShipChosen = Convert.ToInt32(Console.ReadLine());
-            }
-            else
-            {
-                Console.WriteLine("List is full.");
-            }
-           
-            return userShipChosen;
-        }
-
-        static void Main(string[] args)   
-        {
             int userInput = 0;
-            string player1Username;  
-            string player2Username;   
+            string player1Username = "";
+            string player2Username = "";
 
             string player1Password;
             string player2Password;
             ProductsRepository productRepository = new ProductsRepository();
+            Class1 cl = new Class1();
+            List<int> player1ChosenShips = new List<int> { };
+            List<string> player1ShipCoordinates = new List<string> { };
+            List<string> player2ShipCoordinates = new List<string> { };
+            int ongoingGameId = 0;
 
             do
             {
@@ -113,6 +99,7 @@ namespace Presentation
                                                         Console.WriteLine("Password correct");
                                                         //if both players password correct and they are already registered
                                                         productRepository.AddPlayerToGames(player1Username, player2Username);
+                                                        ongoingGameId = productRepository.GetGame(player1Username, player2Username);
                                                     }
                                                     else
                                                     {
@@ -178,7 +165,6 @@ namespace Presentation
                                 do
                                 {
                                     player2Password = Console.ReadLine();
-
                                     try
                                     {
                                         if (productRepository.GetPlayerPassword(player2Username) == player2Password)
@@ -187,6 +173,7 @@ namespace Presentation
                                             Console.WriteLine("Password correct");
                                             //if both players password correct and they are already registered
                                             productRepository.AddPlayerToGames(player1Username, player2Username);
+                                            ongoingGameId = productRepository.GetGame(player1Username, player2Username);
                                         }
                                         else
                                         {
@@ -207,86 +194,34 @@ namespace Presentation
                                 player2Password = Console.ReadLine();
                                 productRepository.AddPlayer(player2Username, player2Password);
                                 productRepository.AddPlayerToGames(player1Username, player2Username);
-
                                 //new user 
                             }
                         }
                         //-------------------------------------------------------------------------------------------
-
+                      
                         break;
                     case 2:
                         Console.Clear();
-                        List<int> player1ChosenShips = new List<int> { };
-                        var ships = productRepository.ShowShips();
-                        int userShipChosen;
-                        Console.WriteLine("ID " + " Title" + "    Size");
-                        Console.WriteLine("--------------------");
-                        foreach (var ship in ships)
+
+
+                        if (player1Username != "" && player2Username != "")
                         {
-                            Console.WriteLine($"{ship.ID}   | {ship.Title}   | {ship.Size}");
+                            int ongoingGameID = productRepository.GetGame(player1Username, player2Username);
+                            Console.WriteLine($"Player '{player1Username}' is picking:\n");
+                            var ships = productRepository.ShowShips();
+                            int userShipChosen = 0;
+                            
+                            var allShipsChosen = false;
+
+                            cl.player1ChosenShips(userShipChosen, player1ChosenShips, allShipsChosen, player1ShipCoordinates, player1Username, ongoingGameID);
+
+                            Console.ReadKey();
                         }
-                        var allShipsChosen = false;
-                        do
+                        else
                         {
-                            userShipChosen = gettingUserInput(player1ChosenShips);
-
-                            var userShipByID = productRepository.GetShipByID(userShipChosen);
-
-                            if(userShipByID != null)
-                            {
-                                //This ship exists
-                                if(player1ChosenShips.Count < 1 )
-                                {
-                                    player1ChosenShips.Add(userShipChosen);
-                                    Console.WriteLine($"ship with id {userShipChosen} was added to the list");
-                                }
-                                else
-                                {
-                                    if (player1ChosenShips.Count == 5)
-                                    {
-                                        //All of the ships have been selected
-                                        Console.WriteLine("All Ships have been configured.");
-                                        allShipsChosen = true;
-                                    }
-                                    else
-                                    {
-                                        //More ships need to be selected
-                                        userShipChosen = gettingUserInput(player1ChosenShips);
-                                        
-                                        if (player1ChosenShips.Contains(userShipChosen))
-                                        {
-                                            Console.WriteLine("this ship is chosen already");
-                                        }
-                                        else
-                                        {
-                                            player1ChosenShips.Add(userShipChosen);
-                                            Console.WriteLine($"ship with id {userShipChosen} was added to the list");
-                                        }
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                //This ship doesnt exist
-                                Console.WriteLine("This ship doesnt exist, please choose another one.");
-                            }
-                            /*foreach (var ship in player1ChosenShips)
-                            {
-                                if(userShipChosen == ship)
-                                {
-                                    Console.WriteLine("This ship is already chosen. Please select another ship!");
-                                }
-                                else
-                                {
-                                    
-                                }
-                            }*/
-                        } while (allShipsChosen == false);
-
-                        Console.WriteLine("nice, now whats next");
-                        Console.ReadKey();
-                        /*Console.WriteLine(userShipByID.Title);
-                            Console.ReadKey();*/
+                            Console.WriteLine("Please select your player details first in menu option 1.");
+                            Console.ReadKey();
+                        }
                         break;
                     case 3:
                         Console.WriteLine("Hello");

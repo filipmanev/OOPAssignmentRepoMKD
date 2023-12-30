@@ -84,5 +84,51 @@ namespace DataAccess
         {
             return Context.Ships.FirstOrDefault(x => x.ID == shipChosen);
         }
+
+        public int GetGame(string creator, string opponent)
+        {
+            var ongoingGame = from Game in Context.Games
+                              where (Game.CreatorFK == creator) && (Game.OpponentFK == opponent)
+                              select Game.ID;
+
+            return ongoingGame.FirstOrDefault();
+        }
+
+        /*public List<string> GetGamePlayers(int ongoingGame)
+        {
+            var ongoingGamePlayers = from Game in Context.Games
+                                     where Game.ID == Convert.ToInt32(ongoingGame)
+                                     select Game.CreatorFK;
+
+            return ongoingGamePlayers.FirstOrDefault();
+        }*/
+
+        public int GetShipByIDSize(int shipChosen)
+        {
+            var shipSize = from Ship in Context.Ships
+                           where Ship.ID == shipChosen
+                           select Ship.Size;
+
+            return shipSize.FirstOrDefault();
+        }
+
+       public void addShipToConfig(string ShipString, string player, int game, int ship)
+        {
+            GameShipConfiguration gsc = new GameShipConfiguration
+            {
+                PlayerFK = player,
+                GameFK = game,
+                Coordinate = ShipString,
+                ShipFK = ship
+            };
+            Context.GameShipConfigurations.Add(gsc);
+            Context.SaveChanges();
+        }
+
+        public void checkIfAnyShip()
+        {
+
+        }
+
     }
 }

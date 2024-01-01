@@ -94,14 +94,6 @@ namespace DataAccess
             return ongoingGame.FirstOrDefault();
         }
 
-        /*public List<string> GetGamePlayers(int ongoingGame)
-        {
-            var ongoingGamePlayers = from Game in Context.Games
-                                     where Game.ID == Convert.ToInt32(ongoingGame)
-                                     select Game.CreatorFK;
-
-            return ongoingGamePlayers.FirstOrDefault();
-        }*/
 
         public int GetShipByIDSize(int shipChosen)
         {
@@ -125,10 +117,20 @@ namespace DataAccess
             Context.SaveChanges();
         }
 
-        public void checkIfAnyShip()
+        public List<string> checkCollision(string playerPlaying)
         {
+            List<string> coordinatesInList = new List<string>(); 
+            var shipCoordinates = Context.GameShipConfigurations.Where(x => x.PlayerFK == playerPlaying).Select(GameShipConfiguration => GameShipConfiguration.Coordinate).ToList();
+                foreach (var coor in shipCoordinates)
+                {
+                    string[] stringArray = coor.Split(',');
 
+                    foreach (var arr in stringArray)
+                    {
+                        coordinatesInList.Add(arr);
+                    }
+                }
+            return coordinatesInList;
         }
-
     }
 }

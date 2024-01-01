@@ -202,8 +202,7 @@ namespace Presentation
                         break;
                     case 2:
                         Console.Clear();
-
-
+                        
                         if (player1Username != "" && player2Username != "")
                         {
                             int ongoingGameID = productRepository.GetGame(player1Username, player2Username);
@@ -211,9 +210,15 @@ namespace Presentation
                             var ships = productRepository.ShowShips();
                             int userShipChosen = 0;
                             
+                            var allShipsChosenP1 = false;
                             var allShipsChosen = false;
 
-                            cl.player1ChosenShips(userShipChosen, player1ChosenShips, allShipsChosen, player1ShipCoordinates, player1Username, ongoingGameID);
+                            //do
+                            //{
+                                cl.player1ChosenShips(allShipsChosen, userShipChosen, player1ChosenShips, allShipsChosen, player1ShipCoordinates, player1Username, ongoingGameID);
+                            //} while (allShipsChosen == false);
+
+                            Console.WriteLine("Player 1 is ready");
 
                             Console.ReadKey();
                         }

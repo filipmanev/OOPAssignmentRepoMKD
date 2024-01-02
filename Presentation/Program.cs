@@ -21,6 +21,7 @@ namespace Presentation
             ProductsRepository productRepository = new ProductsRepository();
             Class1 cl = new Class1();
             List<int> player1ChosenShips = new List<int> { };
+            List<int> player2ChosenShips = new List<int> { };
             List<string> player1ShipCoordinates = new List<string> { };
             List<string> player2ShipCoordinates = new List<string> { };
             int ongoingGameId = 0;
@@ -209,14 +210,16 @@ namespace Presentation
                             Console.WriteLine($"Player '{player1Username}' is picking:\n");
                             var ships = productRepository.ShowShips();
                             int userShipChosen = 0;
-                            
-                            var allShipsChosenP1 = false;
-                            var allShipsChosen = false;
+                            int userShipChosen1 = 0;
 
-                            //do
-                            //{
-                                cl.player1ChosenShips(allShipsChosen, userShipChosen, player1ChosenShips, allShipsChosen, player1ShipCoordinates, player1Username, ongoingGameID);
-                            //} while (allShipsChosen == false);
+                            var allShipsChosen = false;
+                            var allShipsChosen1 = false;
+                            //cl.player1ChosenShips(allShipsChosen, userShipChosen, player1ChosenShips, player1ShipCoordinates, player1Username, ongoingGameID);
+
+
+                            cl.player1ChosenShips(allShipsChosen1, userShipChosen1, player2ChosenShips, player2ShipCoordinates, player2Username, ongoingGameID);
+
+
 
                             Console.WriteLine("Player 1 is ready");
 

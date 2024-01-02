@@ -207,21 +207,17 @@ namespace Presentation
                         if (player1Username != "" && player2Username != "")
                         {
                             int ongoingGameID = productRepository.GetGame(player1Username, player2Username);
-                            Console.WriteLine($"Player '{player1Username}' is picking:\n");
+                            
                             var ships = productRepository.ShowShips();
                             int userShipChosen = 0;
                             int userShipChosen1 = 0;
-
                             var allShipsChosen = false;
                             var allShipsChosen1 = false;
-                            //cl.player1ChosenShips(allShipsChosen, userShipChosen, player1ChosenShips, player1ShipCoordinates, player1Username, ongoingGameID);
-
-
+                            bool isPlayerDone = false;
+                            do {
+                                isPlayerDone = cl.player1ChosenShips(allShipsChosen, userShipChosen, player1ChosenShips, player1ShipCoordinates, player1Username, ongoingGameID);
+                            } while (isPlayerDone == false);
                             cl.player1ChosenShips(allShipsChosen1, userShipChosen1, player2ChosenShips, player2ShipCoordinates, player2Username, ongoingGameID);
-
-
-
-                            Console.WriteLine("Player 1 is ready");
 
                             Console.ReadKey();
                         }
@@ -243,7 +239,6 @@ namespace Presentation
                         Console.ReadKey();
                         break;
                 }
-
             } while (userInput != 4);
         }
     }

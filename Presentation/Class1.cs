@@ -51,7 +51,6 @@ namespace Presentation
             {
                 Console.Clear();
                 shipsList();
-
                 Console.WriteLine("\nPlease select a ship by its ID: ");
                 userShipChosen = Convert.ToInt32(Console.ReadLine());
             }
@@ -61,20 +60,17 @@ namespace Presentation
             }
             return userShipChosen;
         }
-
-        public void player1ChosenShips(bool allShipsChosen, int userShipChosen, List<int> player1ChosenShips, List<string> player1ShipCoordinates, string playerPlaying, int ongoingGame)
+        public bool player1ChosenShips(bool allShipsChosen, int userShipChosen, List<int> player1ChosenShips, List<string> player1ShipCoordinates, string playerPlaying, int ongoingGame)
         {
             do
             {
+                Console.WriteLine($"Player '{playerPlaying}' is picking:\n");
                 userShipChosen = gettingUserInput(player1ChosenShips);
-
                 if (userShipChosen == 69)
                 {
                     allShipsChosen = true;
                 }
-
                 var userShipByID = productRepository.GetShipByID(userShipChosen);
-
                 if (userShipByID != null)
                 {
                     if (player1ChosenShips.Contains(userShipChosen))
@@ -84,219 +80,7 @@ namespace Presentation
                     }
                     else
                     {
-                        List<char> letters = new List<char> { 'a', 'b', 'c', 'd', 'e', 'f', 'g'};
-                        List<int> numbers = new List<int> {1,2,3,4,5,6,7,8};
-                        List<char> orientation = new List<char> {'h', 'v'};
-                        List<string> shipFinalCoordinates = new List<string> { };
-                        List<string> shipFinalCoordinatesToSend = new List<string> { };
-                        string shipFinalCoordinatesToSendString = "";
-                        List<string> coordinatesInSQL = productRepository.checkCollision(playerPlaying);
-                        int shipSize = productRepository.GetShipByIDSize(userShipChosen);
-
-                        player1ChosenShips.Add(userShipChosen);
-                        Console.Clear();
-                        gridDisplay();
-                        Console.WriteLine($"\nPlacing ship with size {productRepository.GetShipByIDSize(userShipChosen)}");
-                        bool isFinishedRow = true;
-                        bool isFinishedColumn = true;
-                        bool isFinishedOrientation = true;
-
-                        while (isFinishedRow == true)
-                        {
-                            Console.WriteLine("Please select the Row where to place the boat: ");
-                            char rowForShip = Console.ReadLine()[0];
-
-                            if (letters.Contains(rowForShip))
-                            {
-                                while (isFinishedColumn == true)
-                                {
-                                    Console.WriteLine("Please select the Column where to place the boat: ");
-                                    int columnForShip = Convert.ToInt32(Console.ReadLine());
-                                    isFinishedRow = false;
-
-                                    if (numbers.Contains(columnForShip))
-                                    {
-                                        Console.WriteLine("Do you want to place it horizontal(H) or vertical(V)");
-                                        char orientationForShip = Console.ReadLine()[0];
-                                        isFinishedColumn = false;
-
-                                        while(isFinishedOrientation == true)
-                                        {
-                                            if (orientation.Contains(orientationForShip))
-                                            {
-                                                string currentShip = rowForShip + columnForShip.ToString() + orientationForShip;
-                                                player1ShipCoordinates.Add(currentShip);
-                                                isFinishedOrientation = false;
-                                                string finalCoordinate = "";
-                                                finalCoordinate = "";
-                                                shipFinalCoordinates = new List<string>();
-                                                shipFinalCoordinatesToSend = new List<string>();
-                                                shipFinalCoordinatesToSendString = "";
-                                                int rowSize = letters.IndexOf(rowForShip);
-                                                int finishIndexForShip = rowSize + shipSize;
-                                                int columnSize = numbers.IndexOf(columnForShip);
-                                                int finishIndexForShipColumn = columnSize + shipSize;
-
-                                                foreach (var coordinate in player1ShipCoordinates)
-                                                {
-                                                    if (orientationForShip == 'h')
-                                                    {
-                                                        if (finishIndexForShip > letters.Count)
-                                                        {
-                                                            Console.WriteLine("Please select different coordinates. Ship does not fit.");
-                                                            if (player1ChosenShips.Count > 1)
-                                                            {
-                                                                player1ChosenShips.RemoveAt(player1ChosenShips.Count - 1);
-                                                            }
-                                                            //player1ShipCoordinates.RemoveAt(player1ShipCoordinates.Count - 1);
-                                                            Console.ReadKey();
-                                                            return;
-                                                        }
-                                                        else
-                                                        {
-                                                            int startingIndex = letters.IndexOf(rowForShip);
-                                                            int finishIndex = startingIndex + shipSize;
-
-                                                            for (int h = startingIndex; h < finishIndex; h++)
-                                                            {
-                                                                finalCoordinate = letters[h].ToString() + columnForShip.ToString();
-                                                                shipFinalCoordinates.Add(finalCoordinate);
-                                                            }
-                                                            shipFinalCoordinatesToSend = shipFinalCoordinates;
-                                                            shipFinalCoordinatesToSendString = string.Join(",", shipFinalCoordinatesToSend);
-                                                            string coordinatesHitting = "";
-                                                            if (coordinatesInSQL != null)
-                                                            {
-                                                                foreach (var coor in shipFinalCoordinatesToSend)
-                                                                {
-                                                                    if (coordinatesInSQL.Contains(coor))
-                                                                    {
-                                                                        coordinatesHitting = coordinatesHitting + coor;
-                                                                        Console.WriteLine($"Coordinate {coor} is hitting another ship. Please change the coordinates");
-                                                                        
-                                                                        shipFinalCoordinates = new List<string>();
-                                                                        player1ShipCoordinates = new List<string>();
-                                                                        if (player1ChosenShips.Count >= 1)
-                                                                        {
-                                                                            player1ChosenShips.RemoveAt(player1ChosenShips.Count - 1);
-                                                                        }
-                                                                        return;
-                                                                    }
-                                                                    else {
-                                                                        if (coor == shipFinalCoordinatesToSend[shipFinalCoordinatesToSend.Count - 1])
-                                                                        {
-                                                                            productRepository.addShipToConfig(shipFinalCoordinatesToSendString, playerPlaying, ongoingGame, userShipChosen);
-                                                                            return;
-                                                                        }
-                                                                    }
-                                                                }
-                                                                Console.WriteLine(coordinatesHitting);
-                                                                //player1ChosenShips.RemoveAt(player1ChosenShips.Count - 1);
-                                                            }
-                                                            else
-                                                            {
-                                                                Console.WriteLine("There are no coordinates");
-                                                                productRepository.addShipToConfig(shipFinalCoordinatesToSendString, playerPlaying, ongoingGame, userShipChosen);
-                                                                //shipFinalCoordinates = new List<string>();
-                                                                player1ShipCoordinates = new List<string>();
-                                                            }
-                                                        }
-                                                    }
-                                                    else if(orientationForShip == 'v')
-                                                    {
-                                                        if (finishIndexForShipColumn > numbers.Count)
-                                                        {
-                                                            Console.WriteLine("Please select different coordinates. Ship does not fit.");
-                                                            if (player1ChosenShips.Count > 1)
-                                                            {
-                                                                player1ChosenShips.RemoveAt(player1ChosenShips.Count - 1);
-                                                            }
-                                                            //player1ShipCoordinates.RemoveAt(player1ShipCoordinates.Count - 1);
-                                                            Console.ReadKey();
-                                                            return;
-
-                                                        }
-                                                        else
-                                                        {
-                                                            /*productRepository.addShipToConfig(shipFinalCoordinatesToSendString, playerPlaying, ongoingGame, userShipChosen);
-
-                                                            shipFinalCoordinates = new List<string>();
-                                                            player1ShipCoordinates = new List<string>();
-*/
-                                                            int startingIndex = numbers.IndexOf(columnForShip);
-                                                            int finishIndex = startingIndex + shipSize;
-
-                                                            for (int v = startingIndex; v < finishIndex; v++)
-                                                            {
-                                                                finalCoordinate = rowForShip.ToString() + numbers[v].ToString();
-                                                                shipFinalCoordinates.Add(finalCoordinate);
-                                                            }
-                                                            shipFinalCoordinatesToSend = shipFinalCoordinates;
-                                                            shipFinalCoordinatesToSendString = string.Join(",", shipFinalCoordinatesToSend);
-
-                                                            string coordinatesHitting = "";
-                                                            if (coordinatesInSQL != null)
-                                                            {
-                                                                foreach (var coor in shipFinalCoordinatesToSend)
-                                                                {
-                                                                    if (coordinatesInSQL.Contains(coor))
-                                                                    {
-                                                                        coordinatesHitting = coordinatesHitting + coor;
-                                                                        Console.WriteLine($"Coordinate {coor} is hitting another ship. Please change the coordinates");
-
-                                                                        shipFinalCoordinates = new List<string>();
-                                                                        player1ShipCoordinates = new List<string>();
-                                                                        if (player1ChosenShips.Count >= 1)
-                                                                        {
-                                                                            player1ChosenShips.RemoveAt(player1ChosenShips.Count - 1);
-                                                                        }
-                                                                        return;
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        if (coor == shipFinalCoordinatesToSend[shipFinalCoordinatesToSend.Count - 1])
-                                                                        {
-                                                                            productRepository.addShipToConfig(shipFinalCoordinatesToSendString, playerPlaying, ongoingGame, userShipChosen);
-                                                                            return;
-                                                                        }
-                                                                    }
-                                                                }
-                                                                Console.WriteLine(coordinatesHitting);
-                                                                //player1ChosenShips.RemoveAt(player1ChosenShips.Count - 1);
-                                                            }
-                                                            else
-                                                            {
-                                                                Console.WriteLine("There are no coordinates");
-                                                                productRepository.addShipToConfig(shipFinalCoordinatesToSendString, playerPlaying, ongoingGame, userShipChosen);
-                                                                //shipFinalCoordinates = new List<string>();
-                                                                player1ShipCoordinates = new List<string>();
-                                                            }
-
-                                                        }
-                                                    }
-                                                }
-                                                Console.ReadKey();
-                                            }
-                                            else
-                                            {
-                                                Console.WriteLine("Input out of range. Please check the grid.");
-                                                Console.ReadKey();
-                                            }
-                                        }
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Input out of range. Please check the grid.");
-                                        Console.ReadKey();
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("Input out of range. Please check the grid.");
-                                Console.ReadKey();
-                            }
-                        }
+                        mainLoopFunction(allShipsChosen, userShipChosen, player1ChosenShips, player1ShipCoordinates, playerPlaying, ongoingGame);
                     }
                 }
                 else if (userShipChosen == 69)
@@ -313,9 +97,227 @@ namespace Presentation
                     
                 }
             } while (allShipsChosen == false);
-
-            Console.WriteLine("pick a new pallsadasd");
+            //userShipChosen = 0;
+            //llShipsChosen = false;
+            return true;
         }
+     public void mainLoopFunction(bool allShipsChosen, int userShipChosen, List<int> player1ChosenShips, List<string> player1ShipCoordinates, string playerPlaying, int ongoingGame)
+        {
+            List<char> letters = new List<char> { 'a', 'b', 'c', 'd', 'e', 'f', 'g' };
+            List<int> numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8 };
+            List<char> orientation = new List<char> { 'h', 'v' };
+            List<string> shipFinalCoordinates = new List<string> { };
+            List<string> shipFinalCoordinatesToSend = new List<string> { };
+            string shipFinalCoordinatesToSendString = "";
+            List<string> coordinatesInSQL = productRepository.checkCollision(playerPlaying);
+            int shipSize = productRepository.GetShipByIDSize(userShipChosen);
 
+            player1ChosenShips.Add(userShipChosen);
+            Console.Clear();
+            gridDisplay();
+            Console.WriteLine($"\nPlacing ship with size {productRepository.GetShipByIDSize(userShipChosen)}");
+            bool isFinishedRow = true;
+            bool isFinishedColumn = true;
+            bool isFinishedOrientation = true;
+
+            while (isFinishedRow == true)
+            {
+                Console.WriteLine("Please select the Row where to place the boat: ");
+                char rowForShip = Console.ReadLine()[0];
+                if (letters.Contains(rowForShip))
+                {
+                    while (isFinishedColumn == true)
+                    {
+                        Console.WriteLine("Please select the Column where to place the boat: ");
+                        int columnForShip = Convert.ToInt32(Console.ReadLine());
+                        isFinishedRow = false;
+                        
+                        if (numbers.Contains(columnForShip))
+                        {
+                            Console.WriteLine("Do you want to place it horizontal(H) or vertical(V)");
+                            char orientationForShip = Console.ReadLine()[0];
+                            isFinishedColumn = false;
+
+                            while (isFinishedOrientation == true)
+                            {
+                                if (orientation.Contains(orientationForShip))
+                                {
+                                    string currentShip = rowForShip + columnForShip.ToString() + orientationForShip;
+                                    player1ShipCoordinates.Add(currentShip);
+                                    isFinishedOrientation = false;
+                                    string finalCoordinate = "";
+                                    finalCoordinate = "";
+                                    shipFinalCoordinates = new List<string>();
+                                    shipFinalCoordinatesToSend = new List<string>();
+                                    shipFinalCoordinatesToSendString = "";
+                                    int rowSize = letters.IndexOf(rowForShip);
+                                    int finishIndexForShip = rowSize + shipSize;
+                                    int columnSize = numbers.IndexOf(columnForShip);
+                                    int finishIndexForShipColumn = columnSize + shipSize;
+
+                                    foreach (var coordinate in player1ShipCoordinates)
+                                    {
+                                        if (orientationForShip == 'h')
+                                        {
+                                            if (finishIndexForShip > letters.Count)
+                                            {
+                                                Console.WriteLine("Please select different coordinates. Ship does not fit.");
+                                                if (player1ChosenShips.Count > 1)
+                                                {
+                                                    player1ChosenShips.RemoveAt(player1ChosenShips.Count - 1);
+                                                }
+                                                //player1ShipCoordinates.RemoveAt(player1ShipCoordinates.Count - 1);
+                                                Console.ReadKey();
+                                                return;
+                                            }
+                                            else
+                                            {
+                                                int startingIndex = letters.IndexOf(rowForShip);
+                                                int finishIndex = startingIndex + shipSize;
+
+                                                for (int h = startingIndex; h < finishIndex; h++)
+                                                {
+                                                    finalCoordinate = letters[h].ToString() + columnForShip.ToString();
+                                                    shipFinalCoordinates.Add(finalCoordinate);
+                                                }
+                                                shipFinalCoordinatesToSend = shipFinalCoordinates;
+                                                shipFinalCoordinatesToSendString = string.Join(",", shipFinalCoordinatesToSend);
+                                                string coordinatesHitting = "";
+                                                if (coordinatesInSQL != null)
+                                                {
+                                                    foreach (var coor in shipFinalCoordinatesToSend)
+                                                    {
+                                                        if (coordinatesInSQL.Contains(coor))
+                                                        {
+                                                            coordinatesHitting = coordinatesHitting + coor;
+                                                            Console.WriteLine($"Coordinate {coor} is hitting another ship. Please change the coordinates");
+                                                            shipFinalCoordinates = new List<string>();
+                                                            player1ShipCoordinates = new List<string>();
+                                                            if (player1ChosenShips.Count >= 1)
+                                                            {
+                                                                player1ChosenShips.RemoveAt(player1ChosenShips.Count - 1);
+                                                            }
+                                                            Console.ReadKey();
+                                                            return;
+                                                        }
+                                                        else
+                                                        {
+                                                            if (coor == shipFinalCoordinatesToSend[shipFinalCoordinatesToSend.Count - 1])
+                                                            {
+                                                                productRepository.addShipToConfig(shipFinalCoordinatesToSendString, playerPlaying, ongoingGame, userShipChosen);
+                                                                return;
+                                                            }
+                                                        }
+                                                    }
+                                                    Console.WriteLine(coordinatesHitting);
+                                                    Console.ReadKey();
+                                                    //player1ChosenShips.RemoveAt(player1ChosenShips.Count - 1);
+                                                }
+                                                else
+                                                {
+                                                    Console.WriteLine("There are no coordinates");
+                                                    productRepository.addShipToConfig(shipFinalCoordinatesToSendString, playerPlaying, ongoingGame, userShipChosen);
+                                                    //shipFinalCoordinates = new List<string>();
+                                                    player1ShipCoordinates = new List<string>();
+                                                }
+                                                Console.ReadKey();
+                                            }
+                                        }
+                                        else if (orientationForShip == 'v')
+                                        {
+                                            if (finishIndexForShipColumn > numbers.Count)
+                                            {
+                                                Console.WriteLine("Please select different coordinates. Ship does not fit.");
+                                                if (player1ChosenShips.Count > 1)
+                                                {
+                                                    player1ChosenShips.RemoveAt(player1ChosenShips.Count - 1);
+                                                }
+                                                //player1ShipCoordinates.RemoveAt(player1ShipCoordinates.Count - 1);
+                                                Console.ReadKey();
+                                                return;
+                                            }
+                                            else
+                                            {
+                                                /*productRepository.addShipToConfig(shipFinalCoordinatesToSendString, playerPlaying, ongoingGame, userShipChosen);
+
+                                                shipFinalCoordinates = new List<string>();
+                                                player1ShipCoordinates = new List<string>();
+*/
+                                                int startingIndex = numbers.IndexOf(columnForShip);
+                                                int finishIndex = startingIndex + shipSize;
+
+                                                for (int v = startingIndex; v < finishIndex; v++)
+                                                {
+                                                    finalCoordinate = rowForShip.ToString() + numbers[v].ToString();
+                                                    shipFinalCoordinates.Add(finalCoordinate);
+                                                }
+                                                shipFinalCoordinatesToSend = shipFinalCoordinates;
+                                                shipFinalCoordinatesToSendString = string.Join(",", shipFinalCoordinatesToSend);
+
+                                                string coordinatesHitting = "";
+                                                if (coordinatesInSQL != null)
+                                                {
+                                                    foreach (var coor in shipFinalCoordinatesToSend)
+                                                    {
+                                                        if (coordinatesInSQL.Contains(coor))
+                                                        {
+                                                            coordinatesHitting = coordinatesHitting + coor;
+                                                            Console.WriteLine($"Coordinate {coor} is hitting another ship. Please change the coordinates");
+
+                                                            shipFinalCoordinates = new List<string>();
+                                                            player1ShipCoordinates = new List<string>();
+                                                            if (player1ChosenShips.Count >= 1)
+                                                            {
+                                                                player1ChosenShips.RemoveAt(player1ChosenShips.Count - 1);
+                                                            }
+                                                            Console.ReadKey();
+                                                            return;
+                                                        }
+                                                        else
+                                                        {
+                                                            if (coor == shipFinalCoordinatesToSend[shipFinalCoordinatesToSend.Count - 1])
+                                                            {
+                                                                productRepository.addShipToConfig(shipFinalCoordinatesToSendString, playerPlaying, ongoingGame, userShipChosen);
+                                                                return;
+                                                            }
+                                                        }
+                                                    }
+                                                    Console.WriteLine(coordinatesHitting);
+                                                    //player1ChosenShips.RemoveAt(player1ChosenShips.Count - 1);
+                                                }
+                                                else
+                                                {
+                                                    Console.WriteLine("There are no coordinates");
+                                                    productRepository.addShipToConfig(shipFinalCoordinatesToSendString, playerPlaying, ongoingGame, userShipChosen);
+                                                    //shipFinalCoordinates = new List<string>();
+                                                    player1ShipCoordinates = new List<string>();
+                                                }
+                                                Console.ReadKey();
+                                            }
+                                        }
+                                    }
+                                    Console.ReadKey();
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Input out of range. Please check the grid.");
+                                    Console.ReadKey();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Input out of range. Please check the grid.");
+                            Console.ReadKey();
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Input out of range. Please check the grid.");
+                    Console.ReadKey();
+                }
+            }
+        }
     }
 }

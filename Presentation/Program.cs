@@ -25,6 +25,7 @@ namespace Presentation
             List<string> player1ShipCoordinates = new List<string> { };
             List<string> player2ShipCoordinates = new List<string> { };
             int ongoingGameId = 0;
+            bool playerCoordinatesConfigured = false;
 
             do
             {
@@ -202,10 +203,11 @@ namespace Presentation
                       
                         break;
                     case 2:
-                        Console.Clear();
                         
                         if (player1Username != "" && player2Username != "")
                         {
+                            Console.Clear();
+
                             int ongoingGameID = productRepository.GetGame(player1Username, player2Username);
                             
                             var ships = productRepository.ShowShips();
@@ -219,6 +221,7 @@ namespace Presentation
                             } while (isPlayerDone == false);
                             cl.player1ChosenShips(allShipsChosen1, userShipChosen1, player2ChosenShips, player2ShipCoordinates, player2Username, ongoingGameID);
 
+                            playerCoordinatesConfigured = true;
                             Console.ReadKey();
                         }
                         else
@@ -228,7 +231,14 @@ namespace Presentation
                         }
                         break;
                     case 3:
-                        Console.WriteLine("Hello");
+                        if (playerCoordinatesConfigured ==  true)
+                        {
+                            //If players ships are configured.
+                        }
+                        else{
+                            Console.WriteLine("Please configure the players ship's first.");
+                            Console.ReadKey();
+                        }
                         break;
                     case 4:
                         Console.WriteLine("Hello");

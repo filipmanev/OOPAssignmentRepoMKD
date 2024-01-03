@@ -44,14 +44,15 @@ namespace Presentation
                 Console.WriteLine();
             }
         }
-        public int gettingUserInput(List<int> playerShipsList)
+        public int gettingUserInput(List<int> playerShipsList, string playerPlaying)
         {
+
             int userShipChosen = 0;
             if (playerShipsList.Count < 5)
             {
                 Console.Clear();
                 shipsList();
-                Console.WriteLine("\nPlease select a ship by its ID: ");
+                Console.WriteLine($"\n{playerPlaying}: Please select a ship by its ID: ");
                 userShipChosen = Convert.ToInt32(Console.ReadLine());
             }
             else
@@ -64,8 +65,7 @@ namespace Presentation
         {
             do
             {
-                Console.WriteLine($"Player '{playerPlaying}' is picking:\n");
-                userShipChosen = gettingUserInput(player1ChosenShips);
+                userShipChosen = gettingUserInput(player1ChosenShips, playerPlaying);
                 if (userShipChosen == 69)
                 {
                     allShipsChosen = true;
@@ -162,7 +162,7 @@ namespace Presentation
                                             if (finishIndexForShip > letters.Count)
                                             {
                                                 Console.WriteLine("Please select different coordinates. Ship does not fit.");
-                                                if (player1ChosenShips.Count > 1)
+                                                if (player1ChosenShips.Count > 0)
                                                 {
                                                     player1ChosenShips.RemoveAt(player1ChosenShips.Count - 1);
                                                 }
@@ -228,7 +228,7 @@ namespace Presentation
                                             if (finishIndexForShipColumn > numbers.Count)
                                             {
                                                 Console.WriteLine("Please select different coordinates. Ship does not fit.");
-                                                if (player1ChosenShips.Count > 1)
+                                                if (player1ChosenShips.Count > 0)
                                                 {
                                                     player1ChosenShips.RemoveAt(player1ChosenShips.Count - 1);
                                                 }

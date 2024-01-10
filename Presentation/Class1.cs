@@ -320,8 +320,6 @@ namespace Presentation
         }
         public void playerAttackFunction(string playerPlaying, string playerAttack,string opponent, int ongoingGameID)
         {
-            Console.WriteLine(productRepository.GetCoordinatesForShips(ongoingGameID, playerPlaying));
-            Console.ReadLine();
 
             int userAttackCount = 0;
             Console.Clear();
@@ -357,7 +355,11 @@ namespace Presentation
                                 userAttackCount++;
                                 chosen = true;
                                 Console.Clear();
-                                playerAttackCheck(playerPlaying, playerAttack, opponent, ongoingGameID);
+                                //WORKING FINCTION WITH PARAMETER
+                                //playerAttackCheck(playerPlaying, playerAttack, opponent, ongoingGameID);
+
+                                //TEST FUNCTION WITH PARAMETERS
+                                playerAttackCheck("james", playerAttack, "filip", 40);
                             }
                             else
                             {
@@ -386,10 +388,21 @@ namespace Presentation
         }
         public void playerAttackCheck(string playerPlaying, string playerAttack, string opponent, int ongoingGameID)
         {
+            string coordinatesString = productRepository.GetCoordinatesForShips(ongoingGameID, playerPlaying).Replace(" ", "");
+            List<string> allCoordinatesIndividually =  coordinatesString.Split(',').ToList();
 
-            Console.WriteLine(productRepository.GetCoordinatesForShips(ongoingGameID, playerPlaying));
-            Console.ReadKey();
+            if (allCoordinatesIndividually.Contains(playerAttack))
+            {
+                Console.WriteLine("HIT!!!!!!");
+                productRepository.addAttack(playerAttack, true, ongoingGameID, playerPlaying);
+            }
+            else
+            {
+                Console.WriteLine("MIS");
+                productRepository.addAttack(playerAttack, false, ongoingGameID, playerPlaying);
+            }
 
+            Console.ReadLine();
         }
     }
 }

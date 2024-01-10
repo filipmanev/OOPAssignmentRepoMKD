@@ -108,6 +108,19 @@ namespace DataAccess
             //return shipCoordinates.AsQueryable();
         }
 
+        public void addAttack(string coordinate, bool hit, int gameID, string playerPlaying)
+        {
+            Attack attack = new Attack
+            {
+                Coordinate = coordinate,
+                Hit = hit,
+                GameFK = gameID,
+                PlayerFK = playerPlaying
+            };
+            Context.Attacks.Add(attack);
+            Context.SaveChanges();
+        }
+
        public void addShipToConfig(string ShipString, string player, int game, int ship)
         {
             GameShipConfiguration gsc = new GameShipConfiguration

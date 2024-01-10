@@ -60,16 +60,6 @@
     <Property Name="Size" Type="Int32" Nullable="false" />
     <NavigationProperty Name="GameShipConfigurations" Relationship="Self.FK_GameShipConfiguration_Ships" FromRole="Ships" ToRole="GameShipConfiguration" />
   </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
   <Association Name="FK_Attacks_Games">
     <End Role="Games" Type="Self.Game" Multiplicity="1" />
     <End Role="Attacks" Type="Self.Attack" Multiplicity="*" />
@@ -154,13 +144,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="OOPdbEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="OOPdbEntities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Attacks" EntityType="Self.Attack" />
     <EntitySet Name="Games" EntityType="Self.Game" />
     <EntitySet Name="GameShipConfigurations" EntityType="Self.GameShipConfiguration" />
     <EntitySet Name="Players" EntityType="Self.Player" />
     <EntitySet Name="Ships" EntityType="Self.Ship" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <AssociationSet Name="FK_Attacks_Games" Association="Self.FK_Attacks_Games">
       <End Role="Games" EntitySet="Games" />
       <End Role="Attacks" EntitySet="Attacks" />

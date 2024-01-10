@@ -9,10 +9,10 @@ namespace DataAccess
 {
     public class MyConnectionClass
     {
-        public OOPdbEntities Context { get; set; }
+        public OOPdbEntities1 Context { get; set; }
         public MyConnectionClass()
         {
-            Context = new OOPdbEntities();
+            Context = new OOPdbEntities1();
         }
     }
 }

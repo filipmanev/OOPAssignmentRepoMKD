@@ -46,7 +46,6 @@ namespace Presentation
         }
         public int gettingUserInput(List<int> playerShipsList, string playerPlaying)
         {
-
             int userShipChosen = 0;
             if (playerShipsList.Count < 5)
             {
@@ -101,7 +100,7 @@ namespace Presentation
             //llShipsChosen = false;
             return true;
         }
-     public void mainLoopFunction(bool allShipsChosen, int userShipChosen, List<int> player1ChosenShips, List<string> player1ShipCoordinates, string playerPlaying, int ongoingGame)
+        public void mainLoopFunction(bool allShipsChosen, int userShipChosen, List<int> player1ChosenShips, List<string> player1ShipCoordinates, string playerPlaying, int ongoingGame)
         {
             List<char> letters = new List<char> { 'a', 'b', 'c', 'd', 'e', 'f', 'g' };
             List<int> numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8 };
@@ -318,6 +317,79 @@ namespace Presentation
                     Console.ReadKey();
                 }
             }
+        }
+        public void playerAttackFunction(string playerPlaying, string playerAttack,string opponent, int ongoingGameID)
+        {
+            Console.WriteLine(productRepository.GetCoordinatesForShips(ongoingGameID, playerPlaying));
+            Console.ReadLine();
+
+            int userAttackCount = 0;
+            Console.Clear();
+            List<char> letters = new List<char> { 'a', 'b', 'c', 'd', 'e', 'f', 'g' };
+            List<int> numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8 };
+            bool isFinished = false;
+            char rowAttack;
+            int columnAttack;
+            bool chosen = false;
+            
+            do
+            {
+                Console.WriteLine($"Player {playerPlaying} is attacking: ");
+
+                Console.WriteLine("Enter the Row for the attack: ");
+                char rowAttackCheck = Console.ReadLine()[0];
+                if (letters.Contains(rowAttackCheck))
+                {
+                    Console.Clear();
+                    rowAttack = rowAttackCheck;
+                    do
+                    {
+                        try
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Enter the Column for the attack: ");
+                            int columnAttackCheck = Convert.ToInt32(Console.ReadLine());
+                            if (numbers.Contains(columnAttackCheck))
+                            {
+                                // theattack is valid
+                                columnAttack = columnAttackCheck;
+                                playerAttack = rowAttack + columnAttack.ToString();
+                                userAttackCount++;
+                                chosen = true;
+                                Console.Clear();
+                                playerAttackCheck(playerPlaying, playerAttack, opponent, ongoingGameID);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Input out of range. Please enter the correct Column.");
+                                Console.ReadKey();
+                                Console.Clear();
+                            }
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Invalid input. Please enter a valid integer.");
+                            Console.ReadKey();
+                            Console.Clear();
+                        }
+                    } while (chosen == false);
+                }
+                else
+                {
+                    Console.WriteLine("Input out of range. Please enter the correct Row.");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+            } while (isFinished == false);
+            Console.WriteLine(playerAttack);
+            Console.ReadLine();
+        }
+        public void playerAttackCheck(string playerPlaying, string playerAttack, string opponent, int ongoingGameID)
+        {
+
+            Console.WriteLine(productRepository.GetCoordinatesForShips(ongoingGameID, playerPlaying));
+            Console.ReadKey();
+
         }
     }
 }

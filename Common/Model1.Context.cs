@@ -13,10 +13,10 @@ namespace Common
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class OOPdbEntities : DbContext
+    public partial class OOPdbEntities1 : DbContext
     {
-        public OOPdbEntities()
-            : base("name=OOPdbEntities")
+        public OOPdbEntities1()
+            : base("name=OOPdbEntities1")
         {
         }
     
@@ -30,6 +30,5 @@ namespace Common
         public virtual DbSet<GameShipConfiguration> GameShipConfigurations { get; set; }
         public virtual DbSet<Player> Players { get; set; }
         public virtual DbSet<Ship> Ships { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

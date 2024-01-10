@@ -46,16 +46,6 @@
     <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Size" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
-  </EntityType>
   <Association Name="FK_Attacks_Games">
     <End Role="Games" Type="Self.Games" Multiplicity="1" />
     <End Role="Attacks" Type="Self.Attacks" Multiplicity="*" />
@@ -146,7 +136,6 @@
     <EntitySet Name="GameShipConfiguration" EntityType="Self.GameShipConfiguration" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Players" EntityType="Self.Players" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ships" EntityType="Self.Ships" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Attacks_Games" Association="Self.FK_Attacks_Games">
       <End Role="Games" EntitySet="Games" />
       <End Role="Attacks" EntitySet="Attacks" />

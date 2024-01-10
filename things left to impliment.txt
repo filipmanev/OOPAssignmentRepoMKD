@@ -1,0 +1,24 @@
+make password be raplaced with *
+
+make the grid show where all of the placed ships are 
+
+fix when inputting the oriantatioin, it works correctly when not entering h or v
+
+CHANGE playerCoordinatesConfigured BACK TO FALSE. 
+this is so i can access case 3 without inputting the coordinates for the ships
+
+
+
+
+
+first get all of the coordinates for the opponents ships, get the gameid and the player playing 
+then check each one if it matches with the playerAttack
+if it matches then add it to the dbo.attacks with hit as true
+else add it to dbo.attacks with hit as false
+
+
+
+
+
+
+playerattackfunction display the shit in the first line

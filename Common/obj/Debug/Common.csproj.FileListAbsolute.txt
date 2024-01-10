@@ -22,3 +22,15 @@ C:\Users\Elena\Desktop\OOPAssignmentRepo\Common\obj\Debug\Common.csproj.CoreComp
 C:\Users\Elena\Desktop\OOPAssignmentRepo\Common\obj\Debug\Common.csproj.CopyComplete
 C:\Users\Elena\Desktop\OOPAssignmentRepo\Common\obj\Debug\Common.dll
 C:\Users\Elena\Desktop\OOPAssignmentRepo\Common\obj\Debug\Common.pdb
+C:\Users\Filip\Desktop\OOPAssignmentRepoMKD\Common\bin\Debug\Common.dll.config
+C:\Users\Filip\Desktop\OOPAssignmentRepoMKD\Common\bin\Debug\Common.dll
+C:\Users\Filip\Desktop\OOPAssignmentRepoMKD\Common\bin\Debug\Common.pdb
+C:\Users\Filip\Desktop\OOPAssignmentRepoMKD\Common\bin\Debug\EntityFramework.dll
+C:\Users\Filip\Desktop\OOPAssignmentRepoMKD\Common\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Filip\Desktop\OOPAssignmentRepoMKD\Common\bin\Debug\EntityFramework.xml
+C:\Users\Filip\Desktop\OOPAssignmentRepoMKD\Common\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Filip\Desktop\OOPAssignmentRepoMKD\Common\obj\Debug\Common.csproj.AssemblyReference.cache
+C:\Users\Filip\Desktop\OOPAssignmentRepoMKD\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+C:\Users\Filip\Desktop\OOPAssignmentRepoMKD\Common\obj\Debug\Common.csproj.CopyComplete
+C:\Users\Filip\Desktop\OOPAssignmentRepoMKD\Common\obj\Debug\Common.dll
+C:\Users\Filip\Desktop\OOPAssignmentRepoMKD\Common\obj\Debug\Common.pdb

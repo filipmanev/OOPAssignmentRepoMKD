@@ -25,7 +25,8 @@ namespace Presentation
             List<string> player1ShipCoordinates = new List<string> { };
             List<string> player2ShipCoordinates = new List<string> { };
             int ongoingGameId = 0;
-            bool playerCoordinatesConfigured = false;
+            bool playerCoordinatesConfigured = true;
+            string playerAttack = "";
 
             do
             {
@@ -233,7 +234,9 @@ namespace Presentation
                     case 3:
                         if (playerCoordinatesConfigured ==  true)
                         {
+                            int ongoingGameID = productRepository.GetGame(player1Username, player2Username);
                             //If players ships are configured.
+                            cl.playerAttackFunction(player1Username, playerAttack, player2Username, ongoingGameID);
                         }
                         else{
                             Console.WriteLine("Please configure the players ship's first.");

@@ -246,7 +246,7 @@ namespace Presentation
                                 }
                                 else
                                 {
-                                    cl.playerAttackFunction(player2Username, playerAttack, player1Username, ongoingGameID;
+                                    cl.playerAttackFunction(player2Username, playerAttack, player1Username, ongoingGameID);
                                     if (productRepository.isAllShipsGuessed(player2Username, ongoingGameID) == true)
                                     {
                                         Console.WriteLine($"Player {player2Username} has won the game!");

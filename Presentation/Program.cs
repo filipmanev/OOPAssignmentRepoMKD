@@ -236,7 +236,25 @@ namespace Presentation
                         {
                             int ongoingGameID = productRepository.GetGame(player1Username, player2Username);
                             //If players ships are configured.
-                            cl.playerAttackFunction(player1Username, playerAttack, player2Username, ongoingGameID);
+                            while(true){
+                                cl.playerAttackFunction(player1Username, playerAttack, player2Username, ongoingGameID);
+                                if (productRepository.isAllShipsGuessed(player1Username, ongoingGameID) == true)
+                                {
+                                    Console.WriteLine($"Player {player1Username} has won the game!");
+                                    Console.ReadKey();
+                                    break;
+                                }
+                                else
+                                {
+                                    cl.playerAttackFunction(player2Username, playerAttack, player1Username, ongoingGameID;
+                                    if (productRepository.isAllShipsGuessed(player2Username, ongoingGameID) == true)
+                                    {
+                                        Console.WriteLine($"Player {player2Username} has won the game!");
+                                        Console.ReadKey();
+                                        break;
+                                    }
+                                }
+                            }
                         }
                         else{
                             Console.WriteLine("Please configure the players ship's first.");

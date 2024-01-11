@@ -108,6 +108,41 @@ namespace DataAccess
             //return shipCoordinates.AsQueryable();
         }
 
+        public bool isAllShipsGuessed(string playerPlaying, int ongoingGameID)
+        {
+            var numberOfHits = Context.Attacks.Where(x => x.PlayerFK == playerPlaying && x.GameFK == ongoingGameID && x.Hit == true).Select(x => x.Hit).ToList();
+
+            int HitsCount = numberOfHits.Count;
+
+            if(HitsCount == 17)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void gameWon(int ongoingGameID)
+        {
+        }
+
+        public bool isAttackGuessed(string playerPlaying, int ongoingGameID, string playerAttack)
+        {
+            var doesAttackExist = Context.Attacks.Where(x => x.GameFK == ongoingGameID && x.PlayerFK == playerPlaying).Select(x => x.Coordinate).ToList();
+
+            if (doesAttackExist.Contains(playerAttack))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
         public void addAttack(string coordinate, bool hit, int gameID, string playerPlaying)
         {
             Attack attack = new Attack

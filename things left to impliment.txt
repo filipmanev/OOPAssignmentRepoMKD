@@ -1,24 +1,15 @@
-make password be raplaced with *
-
-make the grid show where all of the placed ships are 
-
 fix when inputting the oriantatioin, it works correctly when not entering h or v
 fix when having one gameshipconfiguration added you cannot add another game config without deleting the old one
-
-
+_____________________________________________________
 CHANGE playerCoordinatesConfigured BACK TO FALSE. 
 this is so i can access case 3 without inputting the coordinates for the ships
-
-
-
-
-
-first get all of the coordinates for the opponents ships, get the gameid and the player playing 
-then check each one if it matches with the playerAttack
-
-if it matches then add it to the dbo.attacks with hit as true
-else add it to dbo.attacks with hit as false
-
-
-
+_____________________________________________________
 playerattackfunction display the shit in the first line
+_____________________________________________________
+make the grid display x or y for hit or miss
+make password be raplaced with *
+make the grid show where all of the placed ships are 
+
+when hit already exists make the user pick again and not go to the next one
+
+if player hits == 17 then the game ends and the player wins

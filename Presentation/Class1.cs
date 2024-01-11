@@ -320,18 +320,17 @@ namespace Presentation
         }
         public void playerAttackFunction(string playerPlaying, string playerAttack,string opponent, int ongoingGameID)
         {
-
-            int userAttackCount = 0;
             Console.Clear();
             List<char> letters = new List<char> { 'a', 'b', 'c', 'd', 'e', 'f', 'g' };
             List<int> numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8 };
             bool isFinished = false;
             char rowAttack;
             int columnAttack;
-            bool chosen = false;
-            
+            List<string> attacksPlayed = new List<string> { };
+
             do
             {
+                Console.Clear();
                 Console.WriteLine($"Player {playerPlaying} is attacking: ");
 
                 Console.WriteLine("Enter the Row for the attack: ");
@@ -340,41 +339,45 @@ namespace Presentation
                 {
                     Console.Clear();
                     rowAttack = rowAttackCheck;
-                    do
+                    try
                     {
-                        try
+                        Console.Clear();
+                        Console.WriteLine("Enter the Column for the attack: ");
+                        int columnAttackCheck = Convert.ToInt32(Console.ReadLine());
+                        if (numbers.Contains(columnAttackCheck))
                         {
-                            Console.Clear();
-                            Console.WriteLine("Enter the Column for the attack: ");
-                            int columnAttackCheck = Convert.ToInt32(Console.ReadLine());
-                            if (numbers.Contains(columnAttackCheck))
+                            columnAttack = columnAttackCheck;
+                            playerAttack = rowAttack + columnAttack.ToString();
+                            if (productRepository.isAttackGuessed(playerPlaying, ongoingGameID, playerAttack) == true)
                             {
-                                // theattack is valid
-                                columnAttack = columnAttackCheck;
-                                playerAttack = rowAttack + columnAttack.ToString();
-                                userAttackCount++;
-                                chosen = true;
+                                Console.WriteLine("That attack already exists. Please try again.");
+                                Console.ReadKey();
+                            }
+                            else
+                            {
+                                attacksPlayed.Add(playerAttack);
                                 Console.Clear();
+                                isFinished = true;
                                 //WORKING FINCTION WITH PARAMETER
                                 //playerAttackCheck(playerPlaying, playerAttack, opponent, ongoingGameID);
 
                                 //TEST FUNCTION WITH PARAMETERS
-                                playerAttackCheck("james", playerAttack, "filip", 40);
-                            }
-                            else
-                            {
-                                Console.WriteLine("Input out of range. Please enter the correct Column.");
-                                Console.ReadKey();
-                                Console.Clear();
+                                playerAttackCheck(playerPlaying, playerAttack, opponent, ongoingGameID);
                             }
                         }
-                        catch (FormatException)
+                        else
                         {
-                            Console.WriteLine("Invalid input. Please enter a valid integer.");
+                            Console.WriteLine("Input out of range. Please enter the correct Column.");
                             Console.ReadKey();
                             Console.Clear();
                         }
-                    } while (chosen == false);
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("Invalid input. Please enter a valid integer.");
+                        Console.ReadKey();
+                        Console.Clear();
+                    }
                 }
                 else
                 {
@@ -383,7 +386,6 @@ namespace Presentation
                     Console.Clear();
                 }
             } while (isFinished == false);
-            Console.WriteLine(playerAttack);
             Console.ReadLine();
         }
         public void playerAttackCheck(string playerPlaying, string playerAttack, string opponent, int ongoingGameID)
@@ -393,16 +395,14 @@ namespace Presentation
 
             if (allCoordinatesIndividually.Contains(playerAttack))
             {
-                Console.WriteLine("HIT!!!!!!");
+                Console.WriteLine($"Coordinate {playerAttack} is a hit!");
                 productRepository.addAttack(playerAttack, true, ongoingGameID, playerPlaying);
             }
             else
             {
-                Console.WriteLine("MIS");
+                Console.WriteLine($"Coordinate {playerAttack} is a miss.");
                 productRepository.addAttack(playerAttack, false, ongoingGameID, playerPlaying);
             }
-
-            Console.ReadLine();
         }
     }
 }

@@ -118,7 +118,6 @@ namespace Presentation
             bool isFinishedRow = true;
             bool isFinishedColumn = true;
             bool isFinishedOrientation = true;
-
             while (isFinishedRow == true)
             {
                 Console.WriteLine("Please select the Row where to place the boat: ");
@@ -130,15 +129,13 @@ namespace Presentation
                         Console.WriteLine("Please select the Column where to place the boat: ");
                         int columnForShip = Convert.ToInt32(Console.ReadLine());
                         isFinishedRow = false;
-                        
                         if (numbers.Contains(columnForShip))
                         {
-                            Console.WriteLine("Do you want to place it horizontal(H) or vertical(V)");
-                            char orientationForShip = Console.ReadLine()[0];
-                            isFinishedColumn = false;
-
                             while (isFinishedOrientation == true)
                             {
+                                Console.WriteLine("Do you want to place it horizontal(H) or vertical(V)");
+                                char orientationForShip = Console.ReadLine()[0];
+                                isFinishedColumn = false;
                                 if (orientation.Contains(orientationForShip))
                                 {
                                     string currentShip = rowForShip + columnForShip.ToString() + orientationForShip;
@@ -327,7 +324,6 @@ namespace Presentation
             char rowAttack;
             int columnAttack;
             List<string> attacksPlayed = new List<string> { };
-
             do
             {
                 Console.Clear();

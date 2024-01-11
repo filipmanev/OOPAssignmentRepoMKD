@@ -126,6 +126,13 @@ namespace DataAccess
 
         public void gameWon(int ongoingGameID)
         {
+
+            var test = Context.Games.SingleOrDefault(x => x.ID == ongoingGameID);
+
+            test.Complete = true;
+
+            Context.SaveChanges();
+
         }
 
         public bool isAttackGuessed(string playerPlaying, int ongoingGameID, string playerAttack)

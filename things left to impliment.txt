@@ -1,15 +1,8 @@
-fix when inputting the oriantatioin, it works correctly when not entering h or v
 fix when having one gameshipconfiguration added you cannot add another game config without deleting the old one
-_____________________________________________________
-CHANGE playerCoordinatesConfigured BACK TO FALSE. 
-this is so i can access case 3 without inputting the coordinates for the ships
-_____________________________________________________
-playerattackfunction display the shit in the first line
 _____________________________________________________
 make the grid display x or y for hit or miss
 make password be raplaced with *
-make the grid show where all of the placed ships are 
+make the grid show where all of the placed ships are
 
-when hit already exists make the user pick again and not go to the next one
 
-if player hits == 17 then the game ends and the player wins
+when u make password wrong, make it still display please enter your password. 

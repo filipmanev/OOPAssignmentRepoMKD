@@ -21,27 +21,305 @@ namespace Presentation
                 Console.WriteLine($"{ship.ID}   | {ship.Title}   | {ship.Size}");
             }
         }
-        public void gridDisplay()
-        {
-            int rows = 8;
-            int columns = 7;
 
-            Console.Write("  ");
+        public void gridDisplay(int ongoingGameID, string playerPlaying)
+        {
+            //attackOrShip check if its a 0 it will display the grid with all of the ship, if its 1 it will display X and O for the attacks
+            int rows = 8; // ↑↓
+            int columns = 7; // <--->
+            string currentCol = "";
+            string coordinates = productRepository.GetCoordinatesForShips(ongoingGameID, playerPlaying, false).Replace(" ", "");
+            List<string> coordinatesList = coordinates.Split(',').ToList();
+
+            Console.Write("   ");
             for (char col = 'A'; col < 'A' + columns; col++)
             {
-                Console.Write(col + " ");
+                Console.Write(" " + col);
             }
             Console.WriteLine();
 
             for (int row = 1; row <= rows; row++)
             {
                 Console.Write(row.ToString().PadLeft(2) + " ");
-
                 for (int col = 1; col <= columns; col++)
                 {
-                    Console.Write("O ");
+                    if (col == 1)
+                    {
+                        currentCol = "a" + row;
+                        if (coordinatesList.Contains(currentCol))
+                        {
+                            Cell(0);
+                        }
+                        else
+                        {
+                            Cell(1);
+                        }
+                    }
+                    else if (col == 2)
+                    {
+                        currentCol = "b" + row;
+                        if (coordinatesList.Contains(currentCol))
+                        {
+                            Cell(0);
+                        }
+                        else
+                        {
+                            Cell(1);
+                        }
+                    }
+                    else if (col == 3)
+                    {
+                        currentCol = "c" + row;
+                        if (coordinatesList.Contains(currentCol))
+                        {
+                            Cell(0);
+                        }
+                        else
+                        {
+                            Cell(1);
+                        }
+                    }
+                    else if (col == 4)
+                    {
+                        currentCol = "d" + row;
+                        if (coordinatesList.Contains(currentCol))
+                        {
+                            Cell(0);
+                        }
+                        else
+                        {
+                            Cell(1);
+                        }
+                    }
+                    else if (col == 5)
+                    {
+                        currentCol = "e" + row;
+                        if (coordinatesList.Contains(currentCol))
+                        {
+                            Cell(0);
+                        }
+                        else
+                        {
+                            Cell(1);
+                        }
+                    }
+                    else if (col == 6)
+                    {
+                        currentCol = "f" + row;
+                        if (coordinatesList.Contains(currentCol))
+                        {
+                            Cell(0);
+                        }
+                        else
+                        {
+                            Cell(1);
+
+                        }
+                    }
+                    else if (col == 7)
+                    {
+                        currentCol = "g" + row;
+                        if (coordinatesList.Contains(currentCol))
+                        {
+                            Cell(0);
+                            Console.Write("|");
+                        }
+                        else
+                        {
+                            Cell(1);
+                            Console.Write("|");
+                        }
+                    }
                 }
                 Console.WriteLine();
+            }
+        }
+        public void displayAttacks(int ongoingGameID, string playerPlaying)
+        {
+            int rows = 8; // ↑↓
+            int columns = 7; // <--->
+            string currentCol = "";
+            List<string> coordinatesList = productRepository.attacks(playerPlaying, ongoingGameID); //all of the attacks done by the player
+
+            Console.Write("   ");
+            for (char col = 'A'; col < 'A' + columns; col++)
+            {
+                Console.Write(" " + col);
+            }
+            Console.WriteLine();
+
+            for (int row = 1; row <= rows; row++)
+            {
+                Console.Write(row.ToString().PadLeft(2) + " ");
+                for (int col = 1; col <= columns; col++)
+                {
+                    if (col == 1)
+                    {
+                        currentCol = "a" + row;
+                        if (coordinatesList.Contains(currentCol))
+                        {
+                            if (productRepository.attackStatus(ongoingGameID, playerPlaying, currentCol) == true)
+                            {
+                                Cell(2);
+                            }
+                            else
+                            {
+                                Cell(3);
+                            }
+                        }
+                        else
+                        {
+                            Cell(1);
+                        }
+                    }
+                    else if (col == 2)
+                    {
+                        currentCol = "b" + row;
+                        if (coordinatesList.Contains(currentCol))
+                        {
+                            if (productRepository.attackStatus(ongoingGameID, playerPlaying, currentCol) == true)
+                            {
+                                Cell(2);
+                            }
+                            else
+                            {
+                                Cell(3);
+                            }
+                        }
+                        else
+                        {
+                            Cell(1);
+                        }
+                    }
+                    else if (col == 3)
+                    {
+                        currentCol = "c" + row;
+                        if (coordinatesList.Contains(currentCol))
+                        {
+                            if (productRepository.attackStatus(ongoingGameID, playerPlaying, currentCol) == true)
+                            {
+                                Cell(2);
+                            }
+                            else
+                            {
+                                Cell(3);
+                            }
+                        }
+                        else
+                        {
+                            Cell(1);
+                        }
+                    }
+                    else if (col == 4)
+                    {
+                        currentCol = "d" + row;
+                        if (coordinatesList.Contains(currentCol))
+                        {
+                            if (productRepository.attackStatus(ongoingGameID, playerPlaying, currentCol) == true)
+                            {
+                                Cell(2);
+                            }
+                            else
+                            {
+                                Cell(3);
+                            }
+                        }
+                        else
+                        {
+                            Cell(1);
+                        }
+                    }
+                    else if (col == 5)
+                    {
+                        currentCol = "e" + row;
+                        if (coordinatesList.Contains(currentCol))
+                        {
+                            if (productRepository.attackStatus(ongoingGameID, playerPlaying, currentCol) == true)
+                            {
+                                Cell(2);
+                            }
+                            else
+                            {
+                                Cell(3);
+                            }
+                        }
+                        else
+                        {
+                            Cell(1);
+                        }
+                    }
+                    else if (col == 6)
+                    {
+                        currentCol = "f" + row;
+                        if (coordinatesList.Contains(currentCol))
+                        {
+                            if (productRepository.attackStatus(ongoingGameID, playerPlaying, currentCol) == true)
+                            {
+                                Cell(2);
+                            }
+                            else
+                            {
+                                Cell(3);
+                            }
+                        }
+                        else
+                        {
+                            Cell(1);
+
+                        }
+                    }
+                    else if (col == 7)
+                    {
+                        currentCol = "g" + row;
+                        if (coordinatesList.Contains(currentCol))
+                        {
+                            if (productRepository.attackStatus(ongoingGameID, playerPlaying, currentCol) == true)
+                            {
+                                Cell(2);
+                            }
+                            else
+                            {
+                                Cell(3);
+                            }
+                            Console.Write("|");
+                        }
+                        else
+                        {
+                            Cell(1);
+                            Console.Write("|");
+                        }
+                    }
+                }
+                Console.WriteLine();
+            }
+        }
+        public void Cell(int ship)
+        {
+            if(ship == 0)
+            {
+                Console.Write("|");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("S");
+                Console.ResetColor();
+            }
+            else if(ship == 1)
+            {
+                Console.Write("|");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("O");
+                Console.ResetColor();
+            }else if(ship == 2)
+            {
+                Console.Write("|");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("X");
+                Console.ResetColor();
+            }else if(ship == 3)
+            {
+                Console.Write("|");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("M");
+                Console.ResetColor();
             }
         }
         public int gettingUserInput(List<int> playerShipsList, string playerPlaying)
@@ -108,12 +386,11 @@ namespace Presentation
             List<string> shipFinalCoordinates = new List<string> { };
             List<string> shipFinalCoordinatesToSend = new List<string> { };
             string shipFinalCoordinatesToSendString = "";
-            List<string> coordinatesInSQL = productRepository.checkCollision(playerPlaying);
+            List<string> coordinatesInSQL = productRepository.checkCollision(playerPlaying, ongoingGame);
             int shipSize = productRepository.GetShipByIDSize(userShipChosen);
-
             player1ChosenShips.Add(userShipChosen);
             Console.Clear();
-            gridDisplay();
+            gridDisplay(ongoingGame, playerPlaying);
             Console.WriteLine($"\nPlacing ship with size {productRepository.GetShipByIDSize(userShipChosen)}");
             bool isFinishedRow = true;
             bool isFinishedColumn = true;
@@ -134,7 +411,8 @@ namespace Presentation
                             while (isFinishedOrientation == true)
                             {
                                 Console.WriteLine("Do you want to place it horizontal(H) or vertical(V)");
-                                char orientationForShip = Console.ReadLine()[0];
+                                ConsoleKeyInfo keyInfo = Console.ReadKey();
+                                char orientationForShip = keyInfo.KeyChar;
                                 isFinishedColumn = false;
                                 if (orientation.Contains(orientationForShip))
                                 {
@@ -327,8 +605,10 @@ namespace Presentation
             do
             {
                 Console.Clear();
+                //displayAttacks(ongoingGameID, playerPlaying, false);
+                displayAttacks(ongoingGameID, playerPlaying);
+                Console.WriteLine();
                 Console.WriteLine($"Player {playerPlaying} is attacking: ");
-
                 Console.WriteLine("Enter the Row for the attack: ");
                 char rowAttackCheck = Console.ReadLine()[0];
                 if (letters.Contains(rowAttackCheck))
@@ -338,6 +618,9 @@ namespace Presentation
                     try
                     {
                         Console.Clear();
+                        //displayAttacks(ongoingGameID, playerPlaying, false);
+                        displayAttacks(ongoingGameID, playerPlaying);
+                        Console.WriteLine();
                         Console.WriteLine("Enter the Column for the attack: ");
                         int columnAttackCheck = Convert.ToInt32(Console.ReadLine());
                         if (numbers.Contains(columnAttackCheck))
@@ -354,10 +637,6 @@ namespace Presentation
                                 attacksPlayed.Add(playerAttack);
                                 Console.Clear();
                                 isFinished = true;
-                                //WORKING FINCTION WITH PARAMETER
-                                //playerAttackCheck(playerPlaying, playerAttack, opponent, ongoingGameID);
-
-                                //TEST FUNCTION WITH PARAMETERS
                                 playerAttackCheck(playerPlaying, playerAttack, opponent, ongoingGameID);
                             }
                         }
@@ -386,18 +665,22 @@ namespace Presentation
         }
         public void playerAttackCheck(string playerPlaying, string playerAttack, string opponent, int ongoingGameID)
         {
-            string coordinatesString = productRepository.GetCoordinatesForShips(ongoingGameID, playerPlaying).Replace(" ", "");
+            string coordinatesString = productRepository.GetCoordinatesForShips(ongoingGameID, playerPlaying, true).Replace(" ", "");
             List<string> allCoordinatesIndividually =  coordinatesString.Split(',').ToList();
-
+            
             if (allCoordinatesIndividually.Contains(playerAttack))
             {
                 Console.WriteLine($"Coordinate {playerAttack} is a hit!");
                 productRepository.addAttack(playerAttack, true, ongoingGameID, playerPlaying);
+                //displayAttacks(ongoingGameID, playerPlaying, false);
+                displayAttacks(ongoingGameID, playerPlaying);
             }
             else
             {
                 Console.WriteLine($"Coordinate {playerAttack} is a miss.");
                 productRepository.addAttack(playerAttack, false, ongoingGameID, playerPlaying);
+                //displayAttacks(ongoingGameID, playerPlaying, false);
+                displayAttacks(ongoingGameID, playerPlaying);
             }
         }
     }

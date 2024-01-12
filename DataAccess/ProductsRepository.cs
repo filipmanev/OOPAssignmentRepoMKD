@@ -93,17 +93,29 @@ namespace DataAccess
             return shipSize.FirstOrDefault();
         }
 
-        public string GetCoordinatesForShips(int ongoingGameID, string playerPlaying)
+        public string GetCoordinatesForShips(int ongoingGameID, string playerPlaying, bool attackOrView)
         {
 
             /*var shipCoordinates = from GameShipConfiguration in Context.GameShipConfigurations
                                   where (GameShipConfiguration.GameFK == ongoingGameID) && (GameShipConfiguration.PlayerFK == playerPlaying)
                                   select GameShipConfiguration.Coordinate;*/
+            if (attackOrView == true)
+            {
+                //this is for the playerAttackCheck function
+                var shipCoordinates = Context.GameShipConfigurations.Where(x => x.GameFK == ongoingGameID && x.PlayerFK != playerPlaying).Select(x => x.Coordinate).ToList();
+                string coordinatesString = string.Join(", ", shipCoordinates);
 
-            var shipCoordinates = Context.GameShipConfigurations.Where(x => x.GameFK == ongoingGameID && x.PlayerFK != playerPlaying).Select(x => x.Coordinate).ToList();
-            string coordinatesString = string.Join(", ",shipCoordinates);
+                return coordinatesString;
+            }
+            else
+            {
+                //this is for the gridDisplay
+                var shipCoordinates = Context.GameShipConfigurations.Where(x => x.GameFK == ongoingGameID && x.PlayerFK == playerPlaying).Select(x => x.Coordinate).ToList();
+                string coordinatesString = string.Join(", ", shipCoordinates);
 
-            return coordinatesString;
+                return coordinatesString;
+            }
+            
 
             //return shipCoordinates.AsQueryable();
         }
@@ -123,16 +135,33 @@ namespace DataAccess
                 return false;
             }
         }
-
         public void gameWon(int ongoingGameID)
         {
+            var gameStatus = Context.Games.SingleOrDefault(x => x.ID == ongoingGameID);
 
-            var test = Context.Games.SingleOrDefault(x => x.ID == ongoingGameID);
-
-            test.Complete = true;
+            gameStatus.Complete = true;
 
             Context.SaveChanges();
+        }
+        public List<string> attacks(string playerPlaying, int ongoingGameID)
+        {
+            var attacksList = Context.Attacks.Where(x => x.PlayerFK == playerPlaying && x.GameFK == ongoingGameID).Select(x => x.Coordinate).ToList();
+            string attacks = string.Join(", ", attacksList);
+            return attacksList;
+        }
 
+        public bool attackStatus(int ongoingGameID, string playerPlaying, string coordinate)
+        {
+            var attack = Context.Attacks.Where(x => x.GameFK == ongoingGameID && x.PlayerFK == playerPlaying && x.Coordinate == coordinate).Select(x => x.Hit).ToList();
+            
+            if (attack[0] == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool isAttackGuessed(string playerPlaying, int ongoingGameID, string playerAttack)
@@ -175,10 +204,10 @@ namespace DataAccess
             Context.GameShipConfigurations.Add(gsc);
             Context.SaveChanges();
         }
-        public List<string> checkCollision(string playerPlaying)
+        public List<string> checkCollision(string playerPlaying, int ongoingGameID)
         {
             List<string> coordinatesInList = new List<string>(); 
-            var shipCoordinates = Context.GameShipConfigurations.Where(x => x.PlayerFK == playerPlaying).Select(GameShipConfiguration => GameShipConfiguration.Coordinate).ToList();
+            var shipCoordinates = Context.GameShipConfigurations.Where(x => x.PlayerFK == playerPlaying && x.GameFK == ongoingGameID).Select(GameShipConfiguration => GameShipConfiguration.Coordinate).ToList();
                 foreach (var coor in shipCoordinates)
                 {
                     string[] stringArray = coor.Split(',');

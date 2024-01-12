@@ -27,6 +27,7 @@ namespace Presentation
             bool playerCoordinatesConfigured = false;
             string playerAttack = "";
             bool playersChosen = false;
+            bool isGameWon = false;
 
             Console.WriteLine("****************************");
             Console.WriteLine("*  Welcome to BattleShip!  *");
@@ -68,7 +69,7 @@ namespace Presentation
                             do
                             {
                                 Console.Clear();
-                                Console.WriteLine("Player 1 Username: ");
+                                Console.Write("Player 1 Username: ");
                                 player1Username = Console.ReadLine();
                                 if (player1Username == "")
                                 {
@@ -80,13 +81,13 @@ namespace Presentation
                                     isNameValid = true;
                                     if (productRepository.GetPlayerByUsername(player1Username) != null)
                                     {
-                                        Console.WriteLine("This user already exists.");
-                                        Console.Write("Please enter your password: ");
+                                        Console.WriteLine("\nThis user already exists.");
                                         int maxAttempts = 3;
                                         int attempts = 0;
                                         bool isPasswordCorrect = false;
                                         do
                                         {
+                                            Console.Write("Please enter your password: ");
                                             player1Password = Console.ReadLine();
                                             try
                                             {
@@ -98,7 +99,7 @@ namespace Presentation
                                                     do
                                                     {
                                                         Console.Clear();
-                                                        Console.WriteLine("Player 2 Username: ");
+                                                        Console.Write("Player 2 Username: ");
                                                         player2Username = Console.ReadLine();
                                                         if (player2Username == "" || player2Username == player1Username)
                                                         {
@@ -110,17 +111,14 @@ namespace Presentation
                                                             isNameValid2 = true;
                                                             if (productRepository.GetPlayerByUsername(player2Username) != null)
                                                             {
-                                                                Console.WriteLine("This user already exists.");
-                                                                Console.Write("Please enter your password: ");
-
+                                                                Console.WriteLine("\nThis user already exists.");
                                                                 int maxAttemptsP2 = 3;
                                                                 int attemptsP2 = 0;
                                                                 bool isPasswordCorrectP2 = false;
-
                                                                 do
                                                                 {
+                                                                    Console.Write("Please enter your password: ");
                                                                     player2Password = Console.ReadLine();
-
                                                                     try
                                                                     {
                                                                         if (productRepository.GetPlayerPassword(player2Username) == player2Password)
@@ -149,11 +147,9 @@ namespace Presentation
                                                             {
                                                                 Console.WriteLine("Enter your password: ");
                                                                 player2Password = Console.ReadLine();
-
                                                                 productRepository.AddPlayer(player2Username, player2Password);
-
                                                                 productRepository.AddPlayerToGames(player1Username, player2Username);
-
+                                                                playersChosen = true;
                                                             }
                                                         }
                                                     } while (isNameValid2 == false);
@@ -173,60 +169,70 @@ namespace Presentation
                                     }
                                     else
                                     {
+                                        bool isNameValid3 = false;
                                         //if player username doesnt exist   
-
-                                        Console.WriteLine("Enter your password: ");
+                                        Console.Write("Enter your password: ");
                                         player1Password = Console.ReadLine();
-                                        Console.ReadKey();
-
                                         productRepository.AddPlayer(player1Username, player1Password);
-
-                                        Console.WriteLine("Player 2 username: ");
-                                        player2Username = Console.ReadLine();
-
-                                        if (productRepository.GetPlayerByUsername(player2Username) != null)
+                                        do
                                         {
-                                            Console.WriteLine("This user already exists.");
-                                            Console.WriteLine("Please enter your password");
-
-                                            int maxAttemptsP2 = 3;
-                                            int attemptsP2 = 0;
-                                            bool isPasswordCorrectP2 = false;
-
-                                            do
+                                            Console.Clear();
+                                            Console.WriteLine("Player 2 username: ");
+                                            player2Username = Console.ReadLine();
+                                            if (player2Username == "" || player2Username == player1Username)
                                             {
-                                                player2Password = Console.ReadLine();
-                                                try
+                                                Console.WriteLine("Please enter a valid username.");
+                                                Console.ReadKey();
+                                            }
+                                            else
+                                            {
+                                                isNameValid3 = true;
+                                                if (productRepository.GetPlayerByUsername(player2Username) != null)
                                                 {
-                                                    if (productRepository.GetPlayerPassword(player2Username) == player2Password)
+                                                    Console.WriteLine("This user already exists.");
+                                                    Console.WriteLine("Please enter your password");
+
+                                                    int maxAttemptsP2 = 3;
+                                                    int attemptsP2 = 0;
+                                                    bool isPasswordCorrectP2 = false;
+                                                    do
                                                     {
-                                                        isPasswordCorrectP2 = true;
-                                                        Console.WriteLine("Password correct");
-                                                        //if both players password correct and they are already registered
-                                                        productRepository.AddPlayerToGames(player1Username, player2Username);
-                                                        ongoingGameId = productRepository.GetGame(player1Username, player2Username);
-                                                    }
-                                                    else
-                                                    {
-                                                        attemptsP2++;
-                                                        Console.WriteLine($"Incorrect password. Attempts remaining {maxAttemptsP2 - attemptsP2}");
-                                                    }
+                                                        player2Password = Console.ReadLine();
+                                                        try
+                                                        {
+                                                            if (productRepository.GetPlayerPassword(player2Username) == player2Password)
+                                                            {
+                                                                isPasswordCorrectP2 = true;
+                                                                Console.WriteLine("Password correct");
+                                                                //if both players password correct and they are already registered
+                                                                productRepository.AddPlayerToGames(player1Username, player2Username);
+                                                                ongoingGameId = productRepository.GetGame(player1Username, player2Username);
+                                                                playersChosen = true;
+                                                            }
+                                                            else
+                                                            {
+                                                                attemptsP2++;
+                                                                Console.WriteLine($"Incorrect password. Attempts remaining {maxAttemptsP2 - attemptsP2}");
+                                                            }
+                                                        }
+                                                        catch (Exception ex2)
+                                                        {
+                                                            Console.WriteLine($"An error occured: {ex2.Message}");
+                                                            break;
+                                                        }
+                                                    } while (!isPasswordCorrectP2 && attemptsP2 < maxAttemptsP2);
                                                 }
-                                                catch (Exception ex2)
+                                                else
                                                 {
-                                                    Console.WriteLine($"An error occured: {ex2.Message}");
-                                                    break;
+                                                    Console.WriteLine("Enter your password: ");
+                                                    player2Password = Console.ReadLine();
+                                                    productRepository.AddPlayer(player2Username, player2Password);
+                                                    productRepository.AddPlayerToGames(player1Username, player2Username);
+                                                    playersChosen = true;
                                                 }
-                                            } while (!isPasswordCorrectP2 && attemptsP2 < maxAttemptsP2);
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("Enter your password: ");
-                                            player2Password = Console.ReadLine();
-                                            productRepository.AddPlayer(player2Username, player2Password);
-                                            productRepository.AddPlayerToGames(player1Username, player2Username);
+                                            } 
                                             //new user 
-                                        }
+                                        } while (isNameValid3 == false);
                                     }
                                 }
                             } while (isNameValid == false);
@@ -261,44 +267,52 @@ namespace Presentation
                         }
                         break;
                     case 3:
-                        if (playerCoordinatesConfigured ==  true)
+                        if (isGameWon == false)
                         {
-                            int ongoingGameID = productRepository.GetGame(player1Username, player2Username);
-                            //If players ships are configured.
-                            while(true){
-                                cl.playerAttackFunction(player1Username, playerAttack, player2Username, ongoingGameID);
-                                if (productRepository.isAllShipsGuessed(player1Username, ongoingGameID) == true)
-                                {
-                                    Console.WriteLine($"Player {player1Username} has won the game!");
-                                    productRepository.gameWon(ongoingGameID);
-                                    Console.ReadKey();
-                                    break;
-                                }
-                                else
-                                {
-                                    cl.playerAttackFunction(player2Username, playerAttack, player1Username, ongoingGameID);
-                                    if (productRepository.isAllShipsGuessed(player2Username, ongoingGameID) == true)
+                            if (playerCoordinatesConfigured ==  true) 
+                            {
+                                int ongoingGameID = productRepository.GetGame(player1Username, player2Username);
+                                //If players ships are configured.
+                                while(true){
+                                    cl.playerAttackFunction(player1Username, playerAttack, player2Username, ongoingGameID);
+                                    if (productRepository.isAllShipsGuessed(player1Username, ongoingGameID) == true)
                                     {
-                                        Console.WriteLine($"Player {player2Username} has won the game!");
+                                        Console.WriteLine($"Player {player1Username} has won the game!");
                                         productRepository.gameWon(ongoingGameID);
+                                        isGameWon = true;
                                         Console.ReadKey();
                                         break;
                                     }
+                                    else
+                                    {
+                                        cl.playerAttackFunction(player2Username, playerAttack, player1Username, ongoingGameID);
+                                        if (productRepository.isAllShipsGuessed(player2Username, ongoingGameID) == true)
+                                        {
+                                            Console.WriteLine($"Player {player2Username} has won the game!");
+                                            productRepository.gameWon(ongoingGameID);
+                                            isGameWon = true;
+                                            Console.ReadKey();
+                                            break;
+                                        }
+                                    }
                                 }
                             }
+                            else{
+                                Console.WriteLine("Please configure the players ship's first.");
+                                Console.ReadKey();
+                            }
                         }
-                        else{
-                            Console.WriteLine("Please configure the players ship's first.");
+                        else
+                        {
+                            Console.WriteLine("Game is already won!");
                             Console.ReadKey();
+                            break;
                         }
                         break;
                     case 4:
-                        Console.WriteLine("Hello");
-                        break;
-                    default:
-                        Console.WriteLine("Menu choice out of range or doesn't exist.");
-                        Console.WriteLine("Press any key to continue...");
+                        Console.WriteLine("Thank you for playing!");
                         Console.ReadKey();
+                        System.Environment.Exit(0);
                         break;
                 }
             } while (userInput != 4);

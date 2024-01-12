@@ -1,33 +1,5 @@
 make password be raplaced with *
 make it so when u are displaying the grid, display it at the end so when u enter the last ship it will also show up on the grid
 
-change inside the displayAttack when calling Cell() for a hit or ship, change it to a variable so it ither passes
-2 or 0 if its 2 its a hit if its 0 its a ship
-
 if attacking and entering nothing it crashed FIX THIS
-if entering rowforship or columnforship it crashed FIX THIS
 ______________________
-
-
- public void gridDisplay(int ongoingGameID, string playerPlaying)
-        {
-            int rows = 8; // ↑↓
-            int columns = 7; // <-->
-
-            Console.Write("   ");
-            for (char col = 'A'; col < 'A' + columns; col++)
-            {
-                Console.Write(col + " ");
-            }
-            Console.WriteLine();
-
-            for (int row = 1; row <= rows; row++)
-            {
-                Console.Write(row.ToString().PadLeft(2) + " ");
-                for (int col = 1; col <= columns; col++)
-                {
-                    Console.Write("X ");
-                }
-                Console.WriteLine();
-            }
-        }

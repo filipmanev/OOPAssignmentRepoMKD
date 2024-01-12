@@ -329,8 +329,20 @@ namespace Presentation
             {
                 Console.Clear();
                 shipsList();
-                Console.WriteLine($"\n{playerPlaying}: Please select a ship by its ID: ");
-                userShipChosen = Convert.ToInt32(Console.ReadLine());
+                do
+                {
+                    Console.WriteLine($"\n{playerPlaying}: Please select a ship by its ID: ");
+                    string userShipChosenString = Console.ReadLine();
+
+                    if (!int.TryParse(userShipChosenString, out userShipChosen))
+                    {
+                        Console.WriteLine("Invalid input. Please enter a valid integer.");
+                    }
+                    else
+                    {
+                        break;
+                    }
+                } while (!int.TryParse(Console.ReadLine(), out userShipChosen));
             }
             else
             {
@@ -397,14 +409,41 @@ namespace Presentation
             bool isFinishedOrientation = true;
             while (isFinishedRow == true)
             {
-                Console.WriteLine("Please select the Row where to place the boat: ");
-                char rowForShip = Console.ReadLine()[0];
+                char rowForShip;
+
+                do
+                {
+                    Console.WriteLine("Please select the Row where to place the boat: ");
+                    char.TryParse(Console.ReadLine(), out rowForShip);
+
+                    if (rowForShip == '\0')
+                    {
+                        Console.WriteLine("Invalid input. Please enter a single character");
+                    }
+                } while (rowForShip == '\0');
+                /*Console.WriteLine("Please select the Row where to place the boat: ");
+                char rowForShip = Console.ReadLine()[0];*/
                 if (letters.Contains(rowForShip))
                 {
                     while (isFinishedColumn == true)
                     {
-                        Console.WriteLine("Please select the Column where to place the boat: ");
-                        int columnForShip = Convert.ToInt32(Console.ReadLine());
+                        int columnForShip;
+
+                        do
+                        {
+                            Console.WriteLine("Please select the Column where to place the boat: ");
+                            string input = Console.ReadLine();
+
+                            if (!int.TryParse(input, out columnForShip))
+                            {
+                                Console.WriteLine("Invalid input. Please enter a single character");
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        } while (!int.TryParse(Console.ReadLine(), out columnForShip));
+
                         isFinishedRow = false;
                         if (numbers.Contains(columnForShip))
                         {

@@ -17,6 +17,8 @@ namespace Presentation
 
             string player1Password;
             string player2Password;
+            string maskedPassword1 = "";
+            string maskedPassword2 = "";
             ProductsRepository productRepository = new ProductsRepository();
             Class1 cl = new Class1();
             List<int> player1ChosenShips = new List<int> { };
@@ -88,7 +90,7 @@ namespace Presentation
                                         do
                                         {
                                             Console.Write("Please enter your password: ");
-                                            player1Password = Console.ReadLine();
+                                            player1Password = cl.getMaskedInput();
                                             try
                                             {
                                                 if (productRepository.GetPlayerPassword(player1Username) == player1Password)
@@ -118,7 +120,7 @@ namespace Presentation
                                                                 do
                                                                 {
                                                                     Console.Write("Please enter your password: ");
-                                                                    player2Password = Console.ReadLine();
+                                                                    player2Password = cl.getMaskedInput();
                                                                     try
                                                                     {
                                                                         if (productRepository.GetPlayerPassword(player2Username) == player2Password)
@@ -146,7 +148,7 @@ namespace Presentation
                                                             else
                                                             {
                                                                 Console.WriteLine("Enter your password: ");
-                                                                player2Password = Console.ReadLine();
+                                                                player2Password = cl.getMaskedInput();
                                                                 productRepository.AddPlayer(player2Username, player2Password);
                                                                 productRepository.AddPlayerToGames(player1Username, player2Username);
                                                                 playersChosen = true;
@@ -172,7 +174,7 @@ namespace Presentation
                                         bool isNameValid3 = false;
                                         //if player username doesnt exist   
                                         Console.Write("Enter your password: ");
-                                        player1Password = Console.ReadLine();
+                                        player1Password = cl.getMaskedInput();
                                         productRepository.AddPlayer(player1Username, player1Password);
                                         do
                                         {
@@ -197,7 +199,7 @@ namespace Presentation
                                                     bool isPasswordCorrectP2 = false;
                                                     do
                                                     {
-                                                        player2Password = Console.ReadLine();
+                                                        player2Password = cl.getMaskedInput();
                                                         try
                                                         {
                                                             if (productRepository.GetPlayerPassword(player2Username) == player2Password)
@@ -225,7 +227,7 @@ namespace Presentation
                                                 else
                                                 {
                                                     Console.WriteLine("Enter your password: ");
-                                                    player2Password = Console.ReadLine();
+                                                    player2Password = cl.getMaskedInput();
                                                     productRepository.AddPlayer(player2Username, player2Password);
                                                     productRepository.AddPlayerToGames(player1Username, player2Username);
                                                     playersChosen = true;
@@ -240,30 +242,38 @@ namespace Presentation
                         //-------------------------------------------------------------------------------------------
                         break;
                     case 2:
-                        if (player1Username != "" && player2Username != "")
+                        if (playerCoordinatesConfigured == true)
                         {
-                            Console.Clear();
-
-                            int ongoingGameID = productRepository.GetGame(player1Username, player2Username);
-                            
-                            var ships = productRepository.ShowShips();
-                            int userShipChosen = 0;
-                            int userShipChosen1 = 0;
-                            var allShipsChosen = false;
-                            var allShipsChosen1 = false;
-                            bool isPlayerDone = false;
-                            do {
-                                isPlayerDone = cl.playerChosenShips(allShipsChosen, userShipChosen, player1ChosenShips, player1ShipCoordinates, player1Username, ongoingGameID);
-                            } while (isPlayerDone == false);
-                            cl.playerChosenShips(allShipsChosen1, userShipChosen1, player2ChosenShips, player2ShipCoordinates, player2Username, ongoingGameID);
-
-                            playerCoordinatesConfigured = true;
+                            Console.WriteLine("Ships are already configured. Proceed with attacks!");
                             Console.ReadKey();
                         }
-                        else
-                        {
-                            Console.WriteLine("Please select your player details first in menu option 1.");
-                            Console.ReadKey();
+                        else 
+                        { 
+                            if (player1Username != "" && player2Username != "")
+                            {
+                                Console.Clear();
+
+                                int ongoingGameID = productRepository.GetGame(player1Username, player2Username);
+                            
+                                var ships = productRepository.ShowShips();
+                                int userShipChosen = 0;
+                                int userShipChosen1 = 0;
+                                var allShipsChosen = false;
+                                var allShipsChosen1 = false;
+                                bool isPlayerDone = false;
+                                do {
+                                    isPlayerDone = cl.playerChosenShips(allShipsChosen, userShipChosen, player1ChosenShips, player1ShipCoordinates, player1Username, ongoingGameID);
+                                } while (isPlayerDone == false);
+                                cl.playerChosenShips(allShipsChosen1, userShipChosen1, player2ChosenShips, player2ShipCoordinates, player2Username, ongoingGameID);
+
+                                playerCoordinatesConfigured = true;
+                                Console.ReadKey();
+                            }
+                            else
+                            {
+                                Console.WriteLine("Please select your player details first in menu option 1.");
+                                Console.ReadKey();
+                            }
                         }
                         break;
                     case 3:

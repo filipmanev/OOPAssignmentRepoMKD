@@ -1,4 +1,0 @@
-make password be raplaced with *
-make it so when u are displaying the grid, display it at the end so when u enter the last ship it will also show up on the grid
-
-whne configuring ships print in next line the all ship configured

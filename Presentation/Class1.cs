@@ -350,7 +350,7 @@ namespace Presentation
             }
             return userShipChosen;
         }
-        public bool player1ChosenShips(bool allShipsChosen, int userShipChosen, List<int> player1ChosenShips, List<string> player1ShipCoordinates, string playerPlaying, int ongoingGame)
+        public bool playerChosenShips(bool allShipsChosen, int userShipChosen, List<int> player1ChosenShips, List<string> player1ShipCoordinates, string playerPlaying, int ongoingGame)
         {
             do
             {
@@ -375,7 +375,10 @@ namespace Presentation
                 else if (userShipChosen == 69)
                 {
                     allShipsChosen = true;
-                    Console.WriteLine($"All ships have been placed for player '{playerPlaying}'");
+                    Console.Clear();
+
+                    Console.WriteLine($"\nAll ships have been placed for player '{playerPlaying}'");
+                    gridDisplay(ongoingGame, playerPlaying);
                     Console.ReadKey();
                 }
                 else
@@ -410,7 +413,6 @@ namespace Presentation
             while (isFinishedRow == true)
             {
                 char rowForShip;
-
                 do
                 {
                     Console.WriteLine("Please select the Row where to place the boat: ");
@@ -421,8 +423,7 @@ namespace Presentation
                         Console.WriteLine("Invalid input. Please enter a single character");
                     }
                 } while (rowForShip == '\0');
-                /*Console.WriteLine("Please select the Row where to place the boat: ");
-                char rowForShip = Console.ReadLine()[0];*/
+
                 if (letters.Contains(rowForShip))
                 {
                     while (isFinishedColumn == true)
@@ -648,8 +649,23 @@ namespace Presentation
                 displayAttacks(ongoingGameID, playerPlaying);
                 Console.WriteLine();
                 Console.WriteLine($"Player {playerPlaying} is attacking: ");
-                Console.WriteLine("Enter the Row for the attack: ");
-                char rowAttackCheck = Console.ReadLine()[0];
+
+                char rowAttackCheck;
+                do
+                {
+                    Console.WriteLine("Enter the Row for the attack: ");
+                    char.TryParse(Console.ReadLine(), out rowAttackCheck);
+
+                    if (rowAttackCheck == '\0')
+                    {
+                        Console.WriteLine("Invalid input. Please enter a single character within the grid range. ");
+                    }
+                    else
+                    {
+                        break;
+                    }
+                } while (rowAttackCheck == '\0');
+
                 if (letters.Contains(rowAttackCheck))
                 {
                     Console.Clear();
@@ -660,8 +676,22 @@ namespace Presentation
                         //displayAttacks(ongoingGameID, playerPlaying, false);
                         displayAttacks(ongoingGameID, playerPlaying);
                         Console.WriteLine();
-                        Console.WriteLine("Enter the Column for the attack: ");
-                        int columnAttackCheck = Convert.ToInt32(Console.ReadLine());
+                        int columnAttackCheck;
+                        do
+                        {
+                            Console.WriteLine("Enter the Column for the attack: ");
+                            string input = Console.ReadLine();
+
+                            if(!int.TryParse(input, out columnAttackCheck))
+                            {
+                                Console.WriteLine("Invalid input. Please enter a correct column within the grid range. ");
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        } while (!int.TryParse(Console.ReadLine(), out columnAttackCheck));
+
                         if (numbers.Contains(columnAttackCheck))
                         {
                             columnAttack = columnAttackCheck;

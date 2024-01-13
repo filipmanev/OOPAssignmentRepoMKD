@@ -253,9 +253,9 @@ namespace Presentation
                             var allShipsChosen1 = false;
                             bool isPlayerDone = false;
                             do {
-                                isPlayerDone = cl.player1ChosenShips(allShipsChosen, userShipChosen, player1ChosenShips, player1ShipCoordinates, player1Username, ongoingGameID);
+                                isPlayerDone = cl.playerChosenShips(allShipsChosen, userShipChosen, player1ChosenShips, player1ShipCoordinates, player1Username, ongoingGameID);
                             } while (isPlayerDone == false);
-                            cl.player1ChosenShips(allShipsChosen1, userShipChosen1, player2ChosenShips, player2ShipCoordinates, player2Username, ongoingGameID);
+                            cl.playerChosenShips(allShipsChosen1, userShipChosen1, player2ChosenShips, player2ShipCoordinates, player2Username, ongoingGameID);
 
                             playerCoordinatesConfigured = true;
                             Console.ReadKey();
